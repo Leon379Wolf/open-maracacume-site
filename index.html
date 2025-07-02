@@ -415,7 +415,7 @@
             }, 2000); // Retorna ao texto original após 2 segundos
         });
 
-        // Script para Enviar Dados ao Formspree
+        // Script para Enviar Dados ao SheetDB
         const form = document.getElementById('inscription-form');
         const successMessage = document.getElementById('success-message');
         const registrationNumberDisplay = document.getElementById('registration-number');
@@ -439,13 +439,13 @@
             // Adiciona o número de inscrição aos dados do formulário
             data['numero-inscricao'] = registrationNumber;
 
-            // Envia os dados para o Formspree
-            fetch(' https://formspree.io/f/xpwrbyee ', {
+            // Envia os dados para o SheetDB
+            fetch(' https://sheetdb.io/api/v1/9otys3pyijw76 ', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify({ data })
             })
             .then(response => {
                 console.log('Resposta do servidor:', response); // Depuração: Exibe a resposta do servidor
