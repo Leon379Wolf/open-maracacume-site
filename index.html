@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Maracaçumé de Jiu-Jitsu</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Open Maracaçumé de Jiu-Jitsu</h1>
+        <nav>
+            <ul>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#inscricoes">Inscrições</a></li>
+                <li><a href="#regras">Regras</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <img src="https://raw.githubusercontent.com/Leon379Wolf/OpenMaracacume/main/Logo%20para%20pagina.webp " alt="Logo Open Maracaçumé" loading="lazy">
+        <h2>Bem-vindo ao Open Maracaçumé de Jiu-Jitsu!</h2>
+        <p>A maior competição de Jiu-Jitsu da região está de volta. Venha mostrar suas habilidades no tatame!</p>
+        <a href="#inscricoes">Inscreva-se Agora</a>
+    </section>
+
+    <section id="sobre">
+        <h2>Sobre o Evento</h2>
+        <p>O <strong>Open Maracaçumé de Jiu-Jitsu</strong> será realizado no dia <strong>21 de setembro de 2025</strong>, no Ginásio Municipal de Esportes.</p>
+    </section>
+
+    <section id="inscricoes">
+        <h2>Inscrições para o Open Maracaçumé</h2>
+        <form id="inscription-form">
+            <label for="nome-completo">Nome Completo:</label>
+            <input type="text" id="nome-completo" name="nome-completo" required>
+
+            <label for="idade">Idade:</label>
+            <input type="number" id="idade" name="idade" min="4" max="100" required>
+
+            <label for="sexo">Sexo:</label>
+            <select id="sexo" name="sexo" required>
+                <option value="">Selecione seu sexo</option>
+                <option value="masculino">Masculino</option>
+                <option value="feminino">Feminino</option>
+            </select>
+
+            <label for="equipe">Equipe:</label>
+            <input type="text" id="equipe" name="equipe" placeholder="Ex.: João Filho Team" required>
+
+            <label for="categoria">Categoria:</label>
+            <select id="categoria" name="categoria" required>
+                <option value="">Selecione sua categoria</option>
+                <option value="pré-mirim">Pré-Mirim [4, 5 e 6 anos]</option>
+                <option value="mirim">Mirim [7, 8 e 9 anos]</option>
+                <option value="infantil">Infantil [10, 11 e 12 anos]</option>
+                <option value="infanto-juvenil">Infanto Juvenil [13, 14 e 15 anos]</option>
+                <option value="juvenil">Juvenil [16 e 17 anos]</option>
+                <option value="adulto">Adulto [18 a 29 anos]</option>
+                <option value="master">Master [acima de 29 anos]</option>
+            </select>
+
+            <label for="faixa">Faixa:</label>
+            <select id="faixa" name="faixa" required>
+                <option value="">Selecione sua faixa</option>
+                <option value="branca">Branca</option>
+                <option value="cinza">Cinza</option>
+                <option value="amarela">Amarela</option>
+                <option value="laranja">Laranja</option>
+                <option value="verde">Verde</option>
+                <option value="azul">Azul</option>
+                <option value="roxa">Roxa</option>
+                <option value="preta">Preta</option>
+            </select>
+
+            <label for="peso">Peso (kg):</label>
+            <input type="number" id="peso" name="peso" step="0.1" min="15" max="150" placeholder="Ex.: 45.5" required>
+
+            <label for="categoria-desejada">Categoria em que deseja competir:</label>
+            <select id="categoria-desejada" name="categoria-desejada" required>
+                <option value="">Selecione a categoria desejada</option>
+                <option value="categoria">Categoria [R$ 65,00]</option>
+                <option value="absoluto">Absoluto [R$ 50,00]</option>
+                <option value="ambas">Ambas [R$ 115,00]</option>
+            </select>
+
+            <label for="whatsapp">Número de WhatsApp:</label>
+            <input type="tel" id="whatsapp" name="whatsapp" placeholder="Ex.: 98984285896" pattern="[0-9]{11}" required>
+
+            <button type="submit">Enviar Inscrição</button>
+        </form>
+        <div id="success-message" class="success-message">
+            <p>Inscrição enviada com sucesso!</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Open Maracaçumé de Jiu-Jitsu. Todos os direitos reservados.</p>
+    </footer>
+    <script src="script.js" defer></script>
+</body>
+</html>
