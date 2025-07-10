@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Maracaçumé de Jiu-Jitsu</title>
+    <!-- Favicon -->
+    <link rel="icon" href="https://raw.githubusercontent.com/Leon379Wolf/OpenMaracacume/780875ef1082efcf9db6324aec1f2156297ec781/Camada%2000.png " type="image/png">
+    <!-- Fontes do Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Estilos Personalizados -->
+    <style>
+        /* Estilo Global */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: url(' https://raw.githubusercontent.com/Leon379Wolf/OpenMaracacume/780875ef1082efcf9db6324aec1f2156297ec781/Jiu%20Jitsu%202025.jpg ') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), rgba(0, 0, 0, 0.6);
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        nav ul li a {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #ffdd57;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: #fff;
+            transform: translateY(-2px);
+        }
+        nav ul li a svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+        #hero {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        #hero img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        #hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        #hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        #hero a {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #ffdd57;
+            color: #1a237e;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        #hero a:hover {
+            background: #fbc02d;
+            transform: scale(1.05);
+        }
+        section {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #1a237e;
+            font-weight: 700;
+            text-align: center;
+        }
+        form label {
+            display: block;
+            margin-top: 10px;
+            font-weight: 600;
+            color: #1a237e;
+        }
+        form input, form select, form button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        form input:focus, form select:focus {
+            border-color: #3949ab;
+            outline: none;
+        }
+        form button {
+            background: linear-gradient(135deg, #1a237e, #3949ab);
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+            border: none;
+            font-weight: 600;
+        }
+        form button:hover {
+            background: linear-gradient(135deg, #3949ab, #1a237e);
+            transform: scale(1.05);
+        }
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1rem;
+        }
+        .copy-button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            background: #3949ab;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        .copy-button:hover {
+            background: #1a237e;
+            transform: scale(1.05);
+        }
+        .phone-link {
+            color: #3949ab;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .phone-link:hover {
+            text-decoration: underline;
+        }
+        address {
+            font-style: normal;
+            margin-top: 20px;
+        }
+        footer {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 768px) {
+            #hero h2 {
+                font-size: 2rem;
+            }
+            #hero p {
+                font-size: 1rem;
+            }
+            section h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <h1>Open Maracaçumé de Jiu-Jitsu</h1>
+        <nav>
+            <ul>
+                <li><a href="#sobre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2z"/></svg> Sobre</a></li>
+                <li><a href="#inscricoes"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2z"/></svg> Inscrições</a></li>
+                <li><a href="#regras"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2z"/></svg> Regras</a></li>
+                <li><a href="#contato"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2z"/></svg> Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- Seção Inicial -->
+    <section id="hero">
+        <!-- Imagem do GitHub com Fallback -->
+        <img src="https://raw.githubusercontent.com/Leon379Wolf/OpenMaracacume/24aa9068f7739d14b222e378e72d2036c852b4e4/Logo%20para%20pagina.jpg " 
+             onerror="this.src='https://placehold.co/1200x400?text=Imagem+Indispon%C3%ADvel'; this.onerror=null;" 
+             alt="Logo Open Maracaçumé de Jiu-Jitsu">
+        <h2>Bem-vindo ao Open Maracaçumé de Jiu-Jitsu!</h2>
+        <p>A maior competição de Jiu-Jitsu da região está de volta. Venha mostrar suas habilidades no tatame!</p>
+        <a href="#inscricoes">Inscreva-se Agora</a>
+    </section>
+    <!-- Sobre o Evento -->
+    <section id="sobre">
+        <h2>Sobre o Evento</h2>
+        <p>O <strong>Open Maracaçumé de Jiu-Jitsu</strong> será realizado no dia <strong>21 de setembro de 2025</strong>, no Ginásio Municipal de Esportes. Venha participar ou assistir às lutas mais emocionantes do ano!</p>
+        <p><strong>Valores das Inscrições:</strong></p>
+        <ul>
+            <li>Categoria [R$ 65,00]</li>
+            <li>Absoluto [R$ 50,00]</li>
+            <li>Ambas [R$ 115,00]</li>
+        </ul>
+        <p><strong>Atenção:</strong> As inscrições estarão abertas até o dia <strong>15 de setembro de 2025</strong>.</p>
+    </section>
+    <!-- Inscrições -->
+    <section id="inscricoes">
+        <h2>Inscrições para o Open Maracaçumé</h2>
+        <form id="inscription-form" method="POST">
+            <!-- Nome Completo -->
+            <label for="nome-completo">Nome Completo:</label>
+            <input type="text" id="nome-completo" name="nome-completo" required>
+            <!-- Idade -->
+            <label for="idade">Idade:</label>
+            <input type="number" id="idade" name="idade" min="4" max="100" required>
+            <!-- Sexo -->
+            <label for="sexo">Sexo:</label>
+            <select id="sexo" name="sexo" required>
+                <option value="">Selecione seu sexo</option>
+                <option value="masculino">Masculino</option>
+                <option value="feminino">Feminino</option>
+            </select>
+            <!-- Equipe -->
+            <label for="equipe">Equipe:</label>
+            <input type="text" id="equipe" name="equipe" required>
+            <!-- Categoria -->
+            <label for="categoria">Categoria:</label>
+            <select id="categoria" name="categoria" required>
+                <option value="">Selecione sua categoria</option>
+                <option value="pre-mirim">Pré-Mirim [4, 5 e 6 anos]</option>
+                <option value="mirim">Mirim [7, 8 e 9 anos]</option>
+                <option value="infantil">Infantil [10, 11 e 12 anos]</option>
+                <option value="infanto-juvenil">Infanto Juvenil [13, 14 e 15 anos]</option>
+                <option value="juvenil">Juvenil [16 e 17 anos]</option>
+                <option value="adulto">Adulto [18 a 29 anos]</option>
+                <option value="master">Master [acima de 29 anos]</option>
+            </select>
+            <!-- Faixa -->
+            <label for="faixa">Faixa:</label>
+            <select id="faixa" name="faixa" required>
+                <option value="">Selecione sua faixa</option>
+                <option value="branca">Branca</option>
+                <option value="cinza">Cinza</option>
+                <option value="amarela">Amarela</option>
+                <option value="laranja">Laranja</option>
+                <option value="verde">Verde</option>
+                <option value="azul">Azul</option>
+                <option value="roxa">Roxa</option>
+                <option value="marrom">Marrom</option>
+                <option value="preta">Preta</option>
+            </select>
+            <!-- Peso -->
+            <label for="peso">Peso (kg):</label>
+            <input type="number" id="peso" name="peso" step="0.1" min="15" max="300" required>
+            <!-- Categoria de Competição -->
+            <label for="competicao">Qual categoria deseja competir?</label>
+            <select id="competicao" name="competicao" required>
+                <option value="">Selecione uma opção</option>
+                <option value="categoria">Categoria [R$ 65,00]</option>
+                <option value="absoluto">Absoluto [R$ 50,00]</option>
+                <option value="ambas">Ambas [R$ 115,00]</option>
+            </select>
+            <!-- Número de WhatsApp -->
+            <label for="whatsapp">Número de WhatsApp:</label>
+            <input type="tel" id="whatsapp" name="whatsapp" placeholder="Ex.: 98984285896" pattern="[0-9]{11}" required>
+            <!-- Botão de Envio -->
+            <button type="submit">Enviar Inscrição</button>
+        </form>
+        <!-- Mensagem de Sucesso -->
+        <div id="success-message" class="success-message">
+            <p>Inscrição enviada com sucesso!</p>
+            <p>Seu número de inscrição é: <strong id="registration-number">XXXX</strong> 
+                <button id="copy-registration" class="copy-button">Copiar Número</button>
+            </p>
+            <p>Para confirmar sua inscrição, realize o pagamento via Pix utilizando a seguinte chave:</p>
+            <p><strong>CPF: <span id="pix-key-display">002.276.343-06</span></strong></p>
+            <button id="copy-pix" class="copy-button">Copiar Chave Pix</button>
+            <p>Após o pagamento, envie o comprovante para o número de telefone: <a href="tel:+5598984285896" class="phone-link">(98) 98428-5896</a>.</p>
+            <p>Inclua o número de inscrição no comprovante para identificação.</p>
+        </div>
+    </section>
+    <!-- Regras -->
+    <section id="regras">
+        <h2>Regras do Open Maracaçumé</h2>
+        <ul>
+            <li>Todas as lutas seguirão as regras da IBJJF (International Brazilian Jiu-Jitsu Federation).</li>
+            <li>Os atletas devem usar kimono oficial durante as lutas.</li>
+            <li>O tempo de luta será de 5 minutos para todas as categorias.</li>
+        </ul>
+    </section>
+    <!-- Contato -->
+    <section id="contato">
+        <h2>Contato</h2>
+        <p>Entre em contato conosco para mais informações sobre o <strong>Open Maracaçumé de Jiu-Jitsu</strong>:</p>
+        <address>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width: 16px; height: 16px; vertical-align: middle;">
+                <path d="M12 2L2 22h20L12 2z"/>
+            </svg>
+            E-mail: <a href="mailto:joaofilhobjj@gmail.com">joaofilhobjj@gmail.com</a><br>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width: 16px; height: 16px; vertical-align: middle;">
+                <path d="M12 2L2 22h20L12 2z"/>
+            </svg>
+            Telefone: <a href="tel:+5598984285896">(98) 98428-5896</a>
+        </address>
+    </section>
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2025 Open Maracaçumé de Jiu-Jitsu. Todos os direitos reservados.</p>
+    </footer>
+    <!-- Script para Copiar Chave Pix -->
+    <script>
+        const copyButton = document.getElementById('copy-pix');
+        const copyRegistrationButton = document.getElementById('copy-registration');
+
+        // Função para copiar a chave Pix
+        copyButton.addEventListener('click', () => {
+            const rawPixKey = '00227634306'; // Apenas números para cópia
+            navigator.clipboard.writeText(rawPixKey).then(() => {
+                copyButton.textContent = 'Chave Pix Copiada!';
+                setTimeout(() => {
+                    copyButton.textContent = 'Copiar Chave Pix';
+                }, 2000);
+            });
+        });
+
+        // Script para Enviar Dados ao Backend Intermediário
+        const form = document.getElementById('inscription-form');
+        const successMessage = document.getElementById('success-message');
+        const registrationNumberDisplay = document.getElementById('registration-number');
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+
+            // Coleta os dados do formulário
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            console.log('Dados do formulário:', data); // Depuração: Exibe os dados no console
+
+            // Gera um número de inscrição aleatório de 4 dígitos
+            const registrationNumber = Math.floor(1000 + Math.random() * 9000); // Número entre 1000 e 9999
+            registrationNumberDisplay.textContent = registrationNumber;
+
+            // Adiciona o número de inscrição aos dados do formulário
+            data['numero-inscricao'] = registrationNumber;
+
+            // Envia os dados para o backend intermediário
+            fetch('http://localhost:5000/submit-form', { // Altere para a URL do seu backend
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                console.log('Resposta do servidor:', response); // Depuração: Exibe a resposta do servidor
+                if (response.ok) {
+                    successMessage.style.display = 'block'; // Exibe a mensagem de sucesso
+                    form.reset(); // Limpa o formulário
+                } else {
+                    alert('Erro ao enviar o formulário. Código de status: ' + response.status);
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error); // Depuração: Exibe o erro no console
+                alert('Ocorreu um erro ao enviar o formulário. Tente novamente.');
+            });
+        });
+
+        // Função para copiar o número de inscrição
+        copyRegistrationButton.addEventListener('click', () => {
+            const registrationNumber = registrationNumberDisplay.textContent;
+            navigator.clipboard.writeText(registrationNumber).then(() => {
+                copyRegistrationButton.textContent = 'Número Copiado!';
+                setTimeout(() => {
+                    copyRegistrationButton.textContent = 'Copiar Número';
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
