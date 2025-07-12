@@ -218,8 +218,8 @@
     <!-- Seção Inicial -->
     <section id="hero">
         <!-- Imagem do GitHub com Fallback -->
-        <img src="https://raw.githubusercontent.com/Leon379Wolf/OpenMaracacume/24aa9068f7739d14b222e378e72d2036c852b4e4/Logo%20para%20pagina.jpg " 
-             onerror="this.src='https://placehold.co/1200x400?text=Imagem+Indispon%C3%ADvel'; this.onerror=null;" 
+        <img src="https://raw.githubusercontent.com/Leon379Wolf/OpenMaracacume/24aa9068f7739d14b222e378e72d2036c852b4e4/Logo%20para%20pagina.jpg "
+             onerror="this.src='https://placehold.co/1200x400?text=Imagem+Indispon%C3%ADvel'; this.onerror=null;"
              alt="Logo Open Maracaçumé de Jiu-Jitsu">
         <h2>Bem-vindo ao Open Maracaçumé de Jiu-Jitsu!</h2>
         <p>A maior competição de Jiu-Jitsu da região está de volta. Venha mostrar suas habilidades no tatame!</p>
@@ -261,13 +261,13 @@
             <label for="categoria">Categoria:</label>
             <select id="categoria" name="categoria" required>
                 <option value="">Selecione sua categoria</option>
-                <option value="pre-mirim">Pré-Mirim [4, 5 e 6 anos]</option>
-                <option value="mirim">Mirim [7, 8 e 9 anos]</option>
-                <option value="infantil">Infantil [10, 11 e 12 anos]</option>
-                <option value="infanto-juvenil">Infanto Juvenil [13, 14 e 15 anos]</option>
-                <option value="juvenil">Juvenil [16 e 17 anos]</option>
-                <option value="adulto">Adulto [18 a 29 anos]</option>
-                <option value="master">Master [acima de 29 anos]</option>
+                <option value="pre-mirim" data-age-range="4-6">Pré-Mirim [4, 5 e 6 anos]</option>
+                <option value="mirim" data-age-range="7-9">Mirim [7, 8 e 9 anos]</option>
+                <option value="infantil" data-age-range="10-12">Infantil [10, 11 e 12 anos]</option>
+                <option value="infanto-juvenil" data-age-range="13-15">Infanto Juvenil [13, 14 e 15 anos]</option>
+                <option value="juvenil" data-age-range="16-17">Juvenil [16 e 17 anos]</option>
+                <option value="adulto" data-age-range="18-29">Adulto [18 anos]</option>
+                <option value="master" data-age-range="29-100">Master [29 anos]</option>
             </select>
             <!-- Faixa -->
             <label for="faixa">Faixa:</label>
@@ -285,7 +285,7 @@
             </select>
             <!-- Peso -->
             <label for="peso">Peso (kg):</label>
-            <input type="number" id="peso" name="peso" step="0.1" min="15" max="300" required>
+            <input type="number" id="peso" name="peso" step="0.1" min="20" max="300" required>
             <!-- Categoria de Competição -->
             <label for="competicao">Qual categoria deseja competir?</label>
             <select id="competicao" name="competicao" required>
@@ -303,7 +303,7 @@
         <!-- Mensagem de Sucesso -->
         <div id="success-message" class="success-message">
             <p>Inscrição enviada com sucesso!</p>
-            <p>Seu número de inscrição é: <strong id="registration-number">XXXX</strong> 
+            <p>Seu número de inscrição é: <strong id="registration-number">XXXX</strong>
                 <button id="copy-registration" class="copy-button">Copiar Número</button>
             </p>
             <p>Para confirmar sua inscrição, realize o pagamento via Pix utilizando a seguinte chave:</p>
@@ -349,20 +349,58 @@
         // Função para copiar a chave Pix
         copyButton.addEventListener('click', () => {
             const rawPixKey = '00227634306'; // Apenas números para cópia
-            navigator.clipboard.writeText(rawPixKey).then(() => {
-                copyButton.textContent = 'Chave Pix Copiada!';
-                setTimeout(() => {
-                    copyButton.textContent = 'Copiar Chave Pix';
-                }, 2000);
-            });
+            const tempInput = document.createElement('input');
+            tempInput.value = rawPixKey;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            // Altera o texto do botão temporariamente para feedback visual
+            copyButton.textContent = 'Chave Pix Copiada!';
+            setTimeout(() => {
+                copyButton.textContent = 'Copiar Chave Pix';
+            }, 2000); // Retorna ao texto original após 2 segundos
         });
 
-        // Script para Enviar Dados ao Backend Intermediário
+        // Função para copiar o número de inscrição
+        copyRegistrationButton.addEventListener('click', () => {
+            const registrationNumber = document.getElementById('registration-number').textContent;
+            const tempInput = document.createElement('input');
+            tempInput.value = registrationNumber;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            // Altera o texto do botão temporariamente para feedback visual
+            copyRegistrationButton.textContent = 'Número Copiado!';
+            setTimeout(() => {
+                copyRegistrationButton.textContent = 'Copiar Número';
+            }, 2000); // Retorna ao texto original após 2 segundos
+        });
+
+        // Função para filtrar categorias por idade
+        const idadeInput = document.getElementById('idade');
+        const categoriaSelect = document.getElementById('categoria');
+
+        function updateCategoriaOptions() {
+            const idade = parseInt(idadeInput.value, 10);
+            Array.from(categoriaSelect.options).forEach(option => {
+                if (option.value) {
+                    const [minAge, maxAge] = option.dataset.ageRange.split('-').map(Number);
+                    option.disabled = !(idade >= minAge && idade <= maxAge);
+                }
+            });
+            categoriaSelect.value = ''; // Limpa a seleção anterior
+        }
+
+        idadeInput.addEventListener('input', updateCategoriaOptions);
+
+        // Script para Enviar Dados ao Backend
         const form = document.getElementById('inscription-form');
         const successMessage = document.getElementById('success-message');
         const registrationNumberDisplay = document.getElementById('registration-number');
 
-        form.addEventListener('submit', function (event) {
+        form.addEventListener('submit', async function (event) {
             event.preventDefault(); // Impede o envio padrão do formulário
 
             // Coleta os dados do formulário
@@ -381,38 +419,27 @@
             // Adiciona o número de inscrição aos dados do formulário
             data['numero-inscricao'] = registrationNumber;
 
-            // Envia os dados para o backend intermediário
-            fetch('http://localhost:5000/submit-form', { // Altere para a URL do seu backend
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => {
-                console.log('Resposta do servidor:', response); // Depuração: Exibe a resposta do servidor
-                if (response.ok) {
-                    successMessage.style.display = 'block'; // Exibe a mensagem de sucesso
-                    form.reset(); // Limpa o formulário
-                } else {
-                    alert('Erro ao enviar o formulário. Código de status: ' + response.status);
-                }
-            })
-            .catch(error => {
-                console.error('Erro:', error); // Depuração: Exibe o erro no console
-                alert('Ocorreu um erro ao enviar o formulário. Tente novamente.');
-            });
-        });
+            try {
+                // Envia os dados para o backend
+                const response = await fetch(' https://famous-elevator-465512-u2.rj.r.appspot.com/send-to-sheetdb ', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
 
-        // Função para copiar o número de inscrição
-        copyRegistrationButton.addEventListener('click', () => {
-            const registrationNumber = registrationNumberDisplay.textContent;
-            navigator.clipboard.writeText(registrationNumber).then(() => {
-                copyRegistrationButton.textContent = 'Número Copiado!';
-                setTimeout(() => {
-                    copyRegistrationButton.textContent = 'Copiar Número';
-                }, 2000);
-            });
+                if (!response.ok) {
+                    throw new Error(`Erro ao enviar o formulário. Código de status: ${response.status}`);
+                }
+
+                // Exibe a mensagem de sucesso
+                successMessage.style.display = 'block';
+                form.reset(); // Limpa o formulário
+            } catch (error) {
+                console.error('Erro:', error.message);
+                alert(error.message || 'Ocorreu um erro ao enviar o formulário. Tente novamente.');
+            }
         });
     </script>
 </body>
